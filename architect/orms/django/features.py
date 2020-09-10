@@ -4,7 +4,11 @@ Defines features for the Django ORM.
 
 from django.conf import settings
 from django.db import router, connections, transaction
-from django.db.models.fields import FieldDoesNotExist
+try:
+    from django.db.models.fields import FieldDoesNotExist
+except ImportError:
+    # support for django >= 3.1
+    from django.core.exceptions import FieldDoesNotExist
 from django.db.utils import ConnectionDoesNotExist
 from django.utils.functional import cached_property
 
